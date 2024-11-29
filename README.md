@@ -15,5 +15,5 @@ This Flutter project implements settings and service functionalities using **Get
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/username/flutter-settings-services.git
-   cd flutter-settings-services
+   git clone https://github.com/vigneshtpm/InternTask.git
+   cd InternTask

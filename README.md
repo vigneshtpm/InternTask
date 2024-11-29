@@ -1,16 +1,19 @@
-# interntask
+# Flutter App: Settings and Services
 
-A new Flutter project.
+This Flutter project implements settings and service functionalities using **GetX** for state management, dependency injection, and routing. Additionally, it utilizes the **image_picker** package for selecting images from the gallery or capturing them with the camera.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **GetX State Management**: Efficient state and route management.
+- **Image Selection**: Select images from the gallery or capture new ones using the camera.
+- **Dynamic UI**: Reactive updates using GetX's `Obx` widget.
+- **Easy Navigation**: Seamless screen transitions powered by GetX.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/username/flutter-settings-services.git
+   cd flutter-settings-services

@@ -17,3 +17,9 @@ This Flutter project implements settings and service functionalities using **Get
    ```bash
    git clone https://github.com/vigneshtpm/InternTask.git
    cd InternTask
+2. **Install dependencies**:
+   ```bash
+   flutter pub get
+3. **Run the app**:
+   ```bash
+   flutter run

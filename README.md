@@ -5,7 +5,7 @@ This Flutter project implements settings and service functionalities using **Get
 ## Features
 
 - **GetX State Management**: Efficient state and route management.
-- **Image Selection**: Select images from the gallery or capture new ones using the camera.
+- **Image Selection**: Select images from the gallery.
 - **Dynamic UI**: Reactive updates using GetX's `Obx` widget.
 - **Easy Navigation**: Seamless screen transitions powered by GetX.
 

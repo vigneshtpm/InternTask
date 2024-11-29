@@ -1,6 +1,6 @@
 # Flutter App: Settings and Services
 
-This Flutter project implements settings and service functionalities using **GetX** for state management, dependency injection, and routing. Additionally, it utilizes the **image_picker** package for selecting images from the gallery or capturing them with the camera.
+This Flutter project implements settings and service functionalities using **GetX** for state management, dependency injection, and routing. Additionally, it utilizes the **image_picker** package for selecting images from the gallery.
 
 ## Features
 

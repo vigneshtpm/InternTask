@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:interntask/state/password_controller.dart';
-
+import 'package:interntask/features/presentation/state/password_controller.dart';
 
 class PasswordPage extends StatelessWidget {
   const PasswordPage({Key? key}) : super(key: key);
@@ -135,7 +134,7 @@ class PasswordPage extends StatelessWidget {
                         onChanged: (value) {
                           controller.confirmPassword.value = value;
                         },
-                        obscureText: true,
+
                         decoration: InputDecoration(
                           hintText: "@Hello11",
                           hintStyle: const TextStyle(color: Colors.grey),

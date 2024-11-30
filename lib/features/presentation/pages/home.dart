@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interntask/settings/settings.dart';
+import 'package:interntask/features/presentation/pages/settings.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

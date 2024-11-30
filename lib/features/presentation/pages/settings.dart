@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:interntask/services/changepass.dart';
-import 'package:interntask/services/editprofile.dart';
-import 'package:interntask/state/SettingsController.dart';// Import the controller
+import 'package:interntask/features/presentation/pages/changepass.dart';
+import 'package:interntask/features/presentation/pages/editprofile.dart';
+import 'package:interntask/features/presentation/state/SettingsController.dart';
+
+
 
 class SettingsPage extends StatelessWidget {
   final SettingsController controller = Get.put(SettingsController()); // Initialize the controller

@@ -2,8 +2,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:interntask/utils/utils.dart';
-import 'package:interntask/state/profile_controller.dart'; // Import your controller
+import 'package:interntask/core/utils/utils.dart';
+import 'package:interntask/features/presentation/state/profile_controller.dart';
+
 
 class EditProfilePage extends StatelessWidget {
   // You can now use the ProfileController with GetX

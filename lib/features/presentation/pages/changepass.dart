@@ -11,7 +11,9 @@ class PasswordPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: MediaQuery.of(context).size.width > 800
+          ? null // Hide AppBar on desktop view
+          : AppBar(
         backgroundColor: const Color(0xFF2044FF),
         title: const Text(
           'Change Password',
@@ -56,6 +58,23 @@ class PasswordPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      MediaQuery.of(context).size.width > 800
+                          ? const Center( // Wrap the text inside a Center widget
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text(
+                            "Change Password",
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontFamily: 'Euclid',
+                            ),
+                          ),
+                        ),
+                      )
+                          : SizedBox.shrink(),
+
                       const Padding(
                         padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: Text(
@@ -134,7 +153,6 @@ class PasswordPage extends StatelessWidget {
                         onChanged: (value) {
                           controller.confirmPassword.value = value;
                         },
-
                         decoration: InputDecoration(
                           hintText: "@Hello11",
                           hintStyle: const TextStyle(color: Colors.grey),

@@ -4,10 +4,8 @@ import 'package:interntask/features/presentation/pages/changepass.dart';
 import 'package:interntask/features/presentation/pages/editprofile.dart';
 import 'package:interntask/features/presentation/state/SettingsController.dart';
 
-
-
 class SettingsPage extends StatelessWidget {
-  final SettingsController controller = Get.put(SettingsController()); // Initialize the controller
+  final SettingsController controller = Get.put(SettingsController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,141 +31,158 @@ class SettingsPage extends StatelessWidget {
             Navigator.pop(context); // Navigate back
           },
         ),
-        actions: [
-          IconButton(
-            icon: Container(
-              padding: const EdgeInsets.all(3.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2.0,
-                ),
-              ),
-              child: const Icon(
-                Icons.notifications,
-                color: Colors.white,
-              ),
-            ),
-            onPressed: () {
-              // Handle notification tap
-            },
-          ),
-        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 20.0, top: 16.0),
-              child: Text(
-                'General',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Euclid',
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 800) {
+            // Desktop view
+            return Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: SingleChildScrollView(
+                    child: buildSettingsContent(context),
+                  ),
                 ),
-              ),
-            ),
-            buildSectionTile(
-              context: context,
-              iconPath: 'assets/icons/edit.png',
-              title: 'Edit Profile',
-              onTap: () {
-                // Navigate to Edit Profile Page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()),
-                );
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20.0, top: 5.0),
-              child: Text(
-                'Security',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Euclid',
+                Expanded(
+                  flex: 3,
+                  child: Obx(() {
+                    // Dynamically show Edit Profile or Change Password page
+                    return controller.currentPage.value == 'editProfile'
+                        ? EditProfilePage()
+                        : PasswordPage();
+                  }),
                 ),
-              ),
+              ],
+            );
+          } else {
+            // Mobile view
+            return SingleChildScrollView(
+              child: buildSettingsContent(context),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  Widget buildSettingsContent(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 16.0),
+          child: Text(
+            'General',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Euclid',
             ),
-            buildSectionTile(
-              context: context,
-              iconPath: 'assets/icons/padlock.png',
-              title: 'Change Password',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PasswordPage()),
-                );
-              },
+          ),
+        ),
+        buildSectionTile(
+          context: context,
+          iconPath: 'assets/icons/edit.png',
+          title: 'Edit Profile',
+          onTap: () {
+            if (MediaQuery.of(context).size.width > 800) {
+              // For larger screens (desktop), update the page state using the controller
+              controller.setCurrentPage('editProfile');
+            } else {
+              // For smaller screens (mobile), navigate to PasswordPage
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditProfilePage()),
+              );
+            }
+          },
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 5.0),
+          child: Text(
+            'Security',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Euclid',
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20.0, top: 5.0),
-              child: Text(
-                'Notifications',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Euclid',
-                ),
-              ),
+          ),
+        ),
+        buildSectionTile(
+          context: context,
+          iconPath: 'assets/icons/padlock.png',
+          title: 'Change Password',
+          onTap: () {
+            if (MediaQuery.of(context).size.width > 800) {
+              // For larger screens (desktop), update the page state using the controller
+              controller.setCurrentPage('changePassword');
+            } else {
+              // For smaller screens (mobile), navigate to PasswordPage
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PasswordPage()),
+              );
+            }
+          },
+
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 5.0),
+          child: Text(
+            'Notifications',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Euclid',
             ),
-            // Notifications Switches
-            Obx(() => buildNotificationSwitch(
+          ),
+        ),
+        Obx(() => buildNotificationSwitch(
               iconPath: 'assets/icons/email.png',
               title: 'Email Notification',
               value: controller.isEmailOn.value,
               onChanged: controller.toggleEmailNotification,
             )),
-            Obx(() => buildNotificationSwitch(
+        Obx(() => buildNotificationSwitch(
               iconPath: 'assets/icons/conversation.png',
               title: 'Whatsapp',
               value: controller.isWhatsappOn.value,
               onChanged: controller.toggleWhatsappNotification,
             )),
-            Obx(() => buildNotificationSwitch(
+        Obx(() => buildNotificationSwitch(
               iconPath: 'assets/icons/notification-bell.png',
               title: 'Push',
               value: controller.isPushOn.value,
               onChanged: controller.togglePushNotification,
             )),
-            const Padding(
-              padding: EdgeInsets.only(left: 20.0, top: 5.0),
-              child: Text(
-                'Support & About',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Euclid',
-                ),
-              ),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 5.0),
+          child: Text(
+            'Support & About',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Euclid',
             ),
-            buildSectionTile(
-              context: context,
-              iconPath: 'assets/icons/speech-ballon.png',
-              title: 'Help & Support',
-              onTap: () {
-
-              },
-            ),
-            buildSectionTile(
-              context: context,
-              iconPath: 'assets/icons/condition.png',
-              title: 'Terms and Policies',
-              onTap: () {
-
-              },
-            ),
-          ],
+          ),
         ),
-      ),
+        buildSectionTile(
+          context: context,
+          iconPath: 'assets/icons/speech-ballon.png',
+          title: 'Help & Support',
+          onTap: () {},
+        ),
+        buildSectionTile(
+          context: context,
+          iconPath: 'assets/icons/condition.png',
+          title: 'Terms and Policies',
+          onTap: () {},
+        ),
+      ],
     );
   }
 
-  // Helper method for section tiles
   Widget buildSectionTile({
     required BuildContext context,
     required String iconPath,
@@ -282,4 +297,3 @@ class SettingsPage extends StatelessWidget {
     );
   }
 }
-

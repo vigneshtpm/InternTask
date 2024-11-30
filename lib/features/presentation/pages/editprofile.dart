@@ -5,7 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:interntask/core/utils/utils.dart';
 import 'package:interntask/features/presentation/state/profile_controller.dart';
 
-
 class EditProfilePage extends StatelessWidget {
   // You can now use the ProfileController with GetX
   final ProfileController _controller = Get.put(ProfileController());
@@ -13,7 +12,8 @@ class EditProfilePage extends StatelessWidget {
   // Method to select an image from the gallery or camera
   void selectImage() async {
     try {
-      Uint8List? img = await pickImage(ImageSource.gallery); // Assuming pickImage is your method
+      Uint8List? img = await pickImage(
+          ImageSource.gallery); // Assuming pickImage is your method
       _controller.selectImage(img); // Update the image in the controller
     } catch (e) {
       print('Error selecting image: $e');
@@ -24,27 +24,29 @@ class EditProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2044FF),
-        title: const Text(
-          'Edit Profile',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 23.0,
-            fontFamily: 'Euclid',
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios, // iOS-style back arrow
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: MediaQuery.of(context).size.width > 800
+          ? null // Hide AppBar on desktop view
+          : AppBar(
+              backgroundColor: const Color(0xFF2044FF),
+              title: const Text(
+                'Edit Profile',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 23.0,
+                  fontFamily: 'Euclid',
+                ),
+              ),
+              centerTitle: true,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios, // iOS-style back arrow
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -63,10 +65,24 @@ class EditProfilePage extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                // Profile Image and Text Fields
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    MediaQuery.of(context).size.width > 800
+                        ? const Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Text(
+                              "Edit Profile",
+                              style: TextStyle(
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontFamily: 'Euclid',
+                              ),
+                            ),
+                          ) // Render nothing on desktop view
+                        : SizedBox.shrink(),
+
                     Padding(
                       padding: const EdgeInsets.only(top: 50.0, bottom: 50.0),
                       child: Stack(
@@ -75,13 +91,15 @@ class EditProfilePage extends StatelessWidget {
                           Obx(() {
                             return _controller.image.value != null
                                 ? CircleAvatar(
-                              radius: 64,
-                              backgroundImage: MemoryImage(_controller.image.value!),
-                            )
+                                    radius: 64,
+                                    backgroundImage:
+                                        MemoryImage(_controller.image.value!),
+                                  )
                                 : const CircleAvatar(
-                              radius: 64,
-                              backgroundImage: AssetImage('assets/images/profile.jpg'),
-                            );
+                                    radius: 64,
+                                    backgroundImage:
+                                        AssetImage('assets/images/profile.jpg'),
+                                  );
                           }),
                           // Camera Icon Button Overlay
                           Positioned(
@@ -126,7 +144,8 @@ class EditProfilePage extends StatelessWidget {
                           ),
                           TextField(
                             onChanged: (value) {
-                              _controller.name.value = value; // Update the name in controller
+                              _controller.name.value =
+                                  value; // Update the name in controller
                             },
                             decoration: InputDecoration(
                               hintText: "Vigneshwaran",
@@ -136,7 +155,8 @@ class EditProfilePage extends StatelessWidget {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Color(0xFF2044FF), width: 1.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFF2044FF), width: 1.0),
                               ),
                             ),
                           ),
@@ -154,7 +174,8 @@ class EditProfilePage extends StatelessWidget {
                           ),
                           TextField(
                             onChanged: (value) {
-                              _controller.surname.value = value; // Update the name in controller
+                              _controller.surname.value =
+                                  value; // Update the name in controller
                             },
                             decoration: InputDecoration(
                               hintText: "Krishnamoorthy",
@@ -164,7 +185,8 @@ class EditProfilePage extends StatelessWidget {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Color(0xFF2044FF), width: 1.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFF2044FF), width: 1.0),
                               ),
                             ),
                           ),
@@ -182,7 +204,8 @@ class EditProfilePage extends StatelessWidget {
                           ),
                           TextField(
                             onChanged: (value) {
-                              _controller.email.value = value; // Update the name in controller
+                              _controller.email.value =
+                                  value; // Update the name in controller
                             },
                             decoration: InputDecoration(
                               hintText: "vigneshwaranrk2@gmail.com",
@@ -192,7 +215,8 @@ class EditProfilePage extends StatelessWidget {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Color(0xFF2044FF), width: 1.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFF2044FF), width: 1.0),
                               ),
                             ),
                           ),
@@ -210,7 +234,8 @@ class EditProfilePage extends StatelessWidget {
                           ),
                           TextField(
                             onChanged: (value) {
-                              _controller.phone.value = value; // Update the name in controller
+                              _controller.phone.value =
+                                  value; // Update the name in controller
                             },
                             decoration: InputDecoration(
                               hintText: "8248084792",
@@ -220,7 +245,8 @@ class EditProfilePage extends StatelessWidget {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Color(0xFF2044FF), width: 1.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFF2044FF), width: 1.0),
                               ),
                             ),
                           ),
@@ -238,7 +264,8 @@ class EditProfilePage extends StatelessWidget {
                                       _controller.updateProfile();
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(vertical: 15),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15),
                                       backgroundColor: const Color(0xFF2044FF),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
